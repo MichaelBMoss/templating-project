@@ -15,17 +15,23 @@ def create_list():
     })
     return pages
 
-def create_pages():
-    for page in create_list():
-        template = open("templates/base.html").read()
-        content = open(page['filename']).read()
-        combined1 = template.replace("{{content_ph}}", content)
-        combined2 = combined1.replace("{{title_ph}}", page['title'])
-        combined3 = combined2.replace(page['link'], "box")
-        open(page['output'], "w+").write(combined3)
-        
-def main():
-    create_pages()
+def create_page():
+    from jinja2 import Template
+    for page in create_list():  
+        content = open(page['filename']).read()  
+        base = open("templates/base.html").read()
+        template = Template(base)
+        rendered_page = template.render(
+            title_ph=page['title'],
+            content_ph=content,
+        )
+        open(page['output'], "w+").write(rendered_page)
 
+def main():
+    create_list()
+    create_page()
+    
 if __name__ == "__main__":
     main()
+
+
