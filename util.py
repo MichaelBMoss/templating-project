@@ -31,7 +31,7 @@ def create_links():
     )
     return links
 
-def create_page():
+def create_pages():
     from jinja2 import Template
     for page in create_list():  
         content = open(page['filename']).read()  
@@ -44,10 +44,3 @@ def create_page():
             )
         rendered_page_w_box = rendered_page.replace(page['link_box'], 'box')    
         open(page['output'], "w+").write(rendered_page_w_box)
-
-def main():
-    create_page() 
-    
-
-
-
