@@ -1,11 +1,10 @@
-from util import create_pages
-
 def get_command():
+    from util import create_pages
     import sys
     print("This is argv:", sys.argv)
     if len(sys.argv) < 2:
         print("Please specify 'build' or 'new'")
-        sys.exit(1)  # abort because of error
+        sys.exit(1)
     elif len(sys.argv) == 2:
         command = sys.argv[1]
         print(command)
